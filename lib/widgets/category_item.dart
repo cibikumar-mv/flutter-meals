@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:meals/category_meals_screen.dart';
+import 'package:meals/Screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
