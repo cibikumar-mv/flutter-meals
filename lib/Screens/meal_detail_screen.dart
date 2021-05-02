@@ -15,7 +15,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildContainer(Widget child) {
+  Widget buildContainer({Widget child, double cheight}) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -24,7 +24,7 @@ class MealDetailScreen extends StatelessWidget {
       ),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
-      height: 150,
+      height: cheight,
       width: 300,
       child: child,
     );
@@ -51,7 +51,7 @@ class MealDetailScreen extends StatelessWidget {
             ),
             buildSectionTitle("Ingredients", context),
             buildContainer(
-              ListView.builder(
+              child: ListView.builder(
                 itemBuilder: (ctx, index) => Card(
                   color: Theme.of(context).accentColor,
                   child: Padding(
@@ -62,22 +62,26 @@ class MealDetailScreen extends StatelessWidget {
                 ),
                 itemCount: selectMeal.ingredients.length,
               ),
+              cheight: 150,
             ),
             buildSectionTitle("Steps", context),
-            buildContainer(ListView.builder(
-              itemBuilder: (ctx, index) => Column(
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                      child: Text('# ${(index + 1)}'),
+            buildContainer(
+              child: ListView.builder(
+                itemBuilder: (ctx, index) => Column(
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(
+                        child: Text('# ${(index + 1)}'),
+                      ),
+                      title: Text(selectMeal.steps[index]),
                     ),
-                    title: Text(selectMeal.steps[index]),
-                  ),
-                  Divider(),
-                ],
+                    Divider(),
+                  ],
+                ),
+                itemCount: selectMeal.steps.length,
               ),
-              itemCount: selectMeal.steps.length,
-            ))
+              cheight: 300
+            ),
           ],
         ),
       ),
