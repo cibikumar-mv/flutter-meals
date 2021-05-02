@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/Screens/filters_screen.dart';
 import 'package:meals/Screens/tabs_screen.dart';
 import 'Screens/meal_detail_screen.dart';
 import 'Screens/category_meals_screen.dart';
@@ -36,17 +37,18 @@ class MyApp extends StatelessWidget {
         '/' : (ctx) => TabsScreen(),
         CategoryMealsScreen.routeName : (ctx) => CategoryMealsScreen(),
         MealDetailScreen.routeName : (ctx) =>  MealDetailScreen(),
+        FiltersScreen.routeName : (ctx) => FiltersScreen(),
       },
       //Ongenerate works when a page is not mentioned in routes.
-      onGenerateRoute: (settings){
-        // if(settings.name == '/meal-detail')
-        // Name of the route can be accessed like this.
-        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
-      },
-      //It works when a page can't be loaded and loads in the mentioned page.
-      onUnknownRoute: (settings){
-        return MaterialPageRoute(builder: (ctx) => MealDetailScreen());
-      },
+      // onGenerateRoute: (settings){
+      //   // if(settings.name == '/meal-detail')
+      //   // Name of the route can be accessed like this.
+      //   return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      // },
+      // //It works when a page can't be loaded and loads in the mentioned page.
+      // onUnknownRoute: (settings){
+      //   return MaterialPageRoute(builder: (ctx) => MealDetailScreen());
+      // },
     );
   }
 }
