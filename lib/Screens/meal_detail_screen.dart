@@ -4,6 +4,14 @@ import 'package:meals/dummy_data.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
+  final Function toggleFavourite;
+  final Function isFavourite;
+
+  const MealDetailScreen(
+    this.toggleFavourite,
+    this.isFavourite,
+  );
+
   Widget buildSectionTitle(String text, BuildContext ctx) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -65,32 +73,40 @@ class MealDetailScreen extends StatelessWidget {
             ),
             buildSectionTitle("Steps", context),
             buildContainer(
-              child: ListView.builder(
-                itemBuilder: (ctx, index) => Column(
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Text('# ${(index + 1)}'),
+                child: ListView.builder(
+                  itemBuilder: (ctx, index) => Column(
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          child: Text('# ${(index + 1)}'),
+                        ),
+                        title: Text(selectMeal.steps[index]),
                       ),
-                      title: Text(selectMeal.steps[index]),
-                    ),
-                    Divider(),
-                  ],
+                      Divider(),
+                    ],
+                  ),
+                  itemCount: selectMeal.steps.length,
                 ),
-                itemCount: selectMeal.steps.length,
-              ),
-              cheight: 300
-            ),
+                cheight: 300),
           ],
         ),
       ),
+
+      // This deletes an meal temporarily
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(
+      //     Icons.delete,
+      //   ),
+      //   onPressed: (){
+      //     Navigator.of(context).pop(mealId);
+      //   },
+      // ),
+
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          Icons.delete,
+          isFavourite(mealId) ? Icons.star : Icons.star_border,
         ),
-        onPressed: (){
-          Navigator.of(context).pop(mealId);
-        },
+        onPressed:() => toggleFavourite(mealId),
       ),
     );
   }
